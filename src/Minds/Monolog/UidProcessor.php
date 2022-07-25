@@ -2,6 +2,8 @@
 
 namespace Minds\Monolog;
 
+use Monolog\LogRecord;
+
 class UidProcessor
 {
     /**
@@ -28,13 +30,13 @@ class UidProcessor
      * @param array $record
      * @return array
      */
-    public function __invoke(array $record): array
+    public function __invoke(LogRecord $record): LogRecord
     {
         if ($this->uid === '') {
             $this->uid = $this->generateUid();
         }
 
-        $record['extra']['uid'] = $this->uid;
+        $record->extra['uid'] = $this->uid;
 
         return $record;
     }
